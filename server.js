@@ -5,9 +5,7 @@ const current_build = "development";
 
 const knexConfig = require("./db/knexfile");
 //initialize knex
-console.log("process.env.NODE_ENV", current_build);
-console.log("knexConfig[process.env.NODE_ENV]", knexConfig[current_build]);
-const knex = require("knex")(knexConfig[current_build]);
+const knex = require("./node_modules8/knex/types")(knexConfig[current_build]);
 
 const app = express();
 const port = 3000;
@@ -21,7 +19,7 @@ app.post("/user", async (req, res) => {
 		return res.json({ success: false, message: "Name is required" });
 	}
 
-	await knex("users").insert({ name,email });
+	await console.log(knex("users").insert({ name, email }).toString());
 
 	return await knex("users")
 		.select("id")
